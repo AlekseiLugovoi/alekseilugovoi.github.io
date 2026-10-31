@@ -1,0 +1,564 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aleksei Lugovoi — AI Engineer</title>
+<link rel="icon" href="assets/favicon-32.png?v=3" type="image/png" sizes="32x32">
+<link rel="icon" href="assets/favicon.png?v=3" type="image/png" sizes="128x128">
+<link rel="apple-touch-icon" href="assets/favicon.png?v=3">
+<meta name="description" content="Full-stack AI engineer: computer vision and generative AI, from hackathon prototypes to apps with real users.">
+<meta property="og:title" content="Aleksei Lugovoi — AI Engineer">
+<meta property="og:description" content="Computer vision and generative AI, from hackathon prototypes to apps with real users.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://alekseilugovoi.github.io/">
+<meta property="og:image" content="https://alekseilugovoi.github.io/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://alekseilugovoi.github.io/assets/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+<style>
+@property --pick{syntax:"<color>";inherits:true;initial-value:#b49bff}
+:root{--bg:#000;--panel:#070707;--text:#f2f2f2;--muted:#8f8f8f;--faint:#5f5f5f;--line:#1a1a1a;--line-strong:#2b2b2b;--acc:#b49bff;--sidebar:clamp(280px,27vw,390px);--ease:cubic-bezier(.2,.8,.2,1);--spring:cubic-bezier(.34,1.56,.64,1)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:var(--acc) var(--bg)}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.55 Geist,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+h1,h2,h3,p,ol{margin:0}
+::selection{background:var(--acc);color:var(--bg)}
+:focus-visible{outline:2px solid var(--acc);outline-offset:4px}
+
+.page{display:grid;grid-template-columns:var(--sidebar) minmax(0,1fr)}
+
+/* sidebar */
+.side{position:sticky;top:0;height:100vh;border-right:1px solid var(--line);padding:clamp(28px,4vw,58px);display:flex;flex-direction:column;container-type:inline-size}
+.top{display:grid;gap:14px;width:fit-content}
+.top .role{justify-self:end}
+.side>.lang{position:absolute;right:20px;bottom:20px}
+.name{font-size:14.6cqi;font-weight:650;line-height:.95;letter-spacing:-.055em;white-space:nowrap}
+.name.ru{font-size:12.6cqi;line-height:calc(14.6cqi * .95)}
+.role{color:var(--muted);font-size:13px}
+.lang{position:relative;display:flex;flex:none;background:rgba(255,255,255,.07);border-radius:9px;padding:3px}
+.lang button{position:relative;z-index:1;display:grid;place-items:center;width:36px;height:26px;border-radius:6px;font-size:11px;font-weight:600;line-height:1;letter-spacing:.04em;color:var(--muted);transition:color .3s}
+.lang button.on{color:var(--bg)}
+.lang i{position:absolute;left:3px;top:3px;bottom:3px;width:36px;border-radius:6px;background:#fff;transition:transform .35s var(--ease)}
+.lang[data-l=ru] i{transform:translateX(36px)}
+.lang button:active{transform:scale(.94)}
+.lang button:focus-visible{outline:none}
+.intro{margin:auto 0}
+.eyebrow{color:var(--muted);letter-spacing:.16em;text-transform:uppercase;font-size:12px;font-weight:600;margin-top:20px}
+.intro h1{letter-spacing:-.055em;font-size:clamp(34px,3.4vw,52px);font-weight:560;line-height:1.05}
+/* the Russian headline's longest line is 7em wide; this keeps it on two lines like the English one */
+.intro h1.ru{font-size:min(clamp(34px,3.4vw,52px),13.6cqi);line-height:calc(clamp(34px,3.4vw,52px) * 1.05)}
+.profiles{display:flex;gap:16px;margin-top:28px;color:var(--muted)}
+.profiles a{transition:color .2s}
+.profiles a:hover{color:var(--text)}
+.profiles svg{display:block;width:18px;height:18px}
+.sections{display:grid;gap:2px}
+.sections a{display:grid;grid-template-columns:34px 1fr;align-items:baseline;padding:5px 0;font-size:15px;color:var(--muted);transition:color .2s}
+.sections i{font:normal 12px 'IBM Plex Mono',monospace;color:var(--faint);transition:color .2s}
+.sections a:hover,.sections a.on{color:var(--text)}
+.sections a.on i{color:var(--acc)}
+
+/* main */
+main{padding:clamp(28px,4vw,58px) clamp(20px,5vw,80px) 42px}
+section{max-width:1080px;margin:clamp(72px,9vw,120px) auto 0;scroll-margin-top:24px}
+section:first-child{margin-top:0}
+.title{margin-left:-.05em;letter-spacing:-.05em;font-size:clamp(28px,3vw,40px);font-weight:700;line-height:1.05;margin-bottom:6px}
+#now .title{margin:-2px 0 28px -.05em}
+.lede{color:var(--muted);font-size:14px;margin-bottom:28px}
+
+/* live posters */
+.posters{display:grid;gap:16px}
+.poster{background:var(--c);color:var(--k);border-radius:28px;display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"head metric" "tiers tiers";align-items:end;gap:28px 32px;padding:clamp(24px,3vw,40px)}
+.poster>div:first-child{grid-area:head;align-self:start}
+.poster h3{letter-spacing:-.055em;margin-bottom:8px;font-size:clamp(30px,3.4vw,48px);font-weight:700;line-height:1}
+.poster>div p{opacity:.78;font-size:15px;line-height:1.45}
+.poster>div p em{font-style:normal;opacity:.6}
+.ask{display:inline-block;margin-top:22px;background:var(--k);color:var(--c);border-radius:999px;padding:14px 24px;font-size:14px;font-weight:700;transition:transform .2s}
+.ask:hover{transform:scale(1.04)}
+.metric{grid-area:metric;display:grid;justify-items:end}
+.icon{width:clamp(110px,12vw,150px);aspect-ratio:1;border-radius:28%;box-shadow:0 24px 50px -24px rgba(0,0,0,.6)}
+.metric span{opacity:.7;font-size:15px;font-weight:600;margin-bottom:8px}
+.metric strong{font-variant-numeric:tabular-nums;letter-spacing:-.075em;font-size:clamp(64px,9vw,150px);font-weight:800;line-height:.82}
+.tiers{grid-area:tiers;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));list-style:none;margin:0;padding:0;border-top:2px solid color-mix(in srgb,var(--k) 25%,transparent)}
+.tiers li{display:grid;gap:2px;padding:14px 14px 0 0}
+.tiers span{opacity:.7;font-size:13px;font-weight:600}
+.tiers b{font-size:20px;font-weight:750;letter-spacing:-.03em}
+/* the bots band is moved by JS: it cruises, can be dragged or swiped sideways; vertical swipes stay page scrolls */
+.band{margin-top:22px;overflow:hidden;touch-action:pan-y;user-select:none;-webkit-user-select:none;cursor:grab;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.band.drag{cursor:grabbing}
+.band>div{display:flex;gap:10px;width:max-content;will-change:transform}
+.band a{display:flex;align-items:center;gap:10px;padding:6px 16px 6px 6px;border-radius:99px;background:color-mix(in srgb,var(--k) 9%,transparent);font-size:14px;font-weight:600;white-space:nowrap;transition:background-color .2s,color .2s;-webkit-user-drag:none}
+.band a:hover{background:var(--k);color:var(--c)}
+.band img{width:34px;height:34px;border-radius:50%;object-fit:cover;-webkit-user-drag:none}
+
+/* building */
+.tiles{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.tile{background:var(--panel);border:1px solid var(--line-strong);border-radius:22px;padding:24px;display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+.tile b{font-size:22px;font-weight:700;letter-spacing:-.04em}
+.tile p{color:var(--muted);font-size:14px}
+a.tile{position:relative;transition:border-color .2s}
+a.tile:hover{border-color:var(--c)}
+.tile .go{position:absolute;top:24px;right:24px;color:var(--muted);font-size:18px;transition:color .2s,transform .3s var(--ease)}
+a.tile:hover .go{color:var(--c);transform:translate(2px,-2px)}
+.badge{width:44px;height:44px;border-radius:13px;background:var(--c);color:var(--k);display:grid;place-items:center;font-size:20px;font-weight:800;letter-spacing:-.04em;margin-bottom:10px}
+
+/* lists */
+.list{list-style:none;padding:0;border-top:1px solid var(--line)}
+.list li{border-bottom:1px solid var(--line);transition:opacity .3s}
+.list:has(li:hover) li:not(:hover){opacity:.4}
+.list .n{font-variant-numeric:tabular-nums;color:var(--muted);font-size:13px}
+.list .ic{width:44px;height:44px;border-radius:12px;background:hsl(var(--h) 70% 72%);color:#0d0718;display:grid;place-items:center;font-weight:700;font-size:14px;transition:transform .45s var(--spring)}
+.list li:hover .ic{transform:scale(1.12) rotate(-4deg)}
+.list b{display:inline-block;font-size:18px;font-weight:650;letter-spacing:-.03em}
+.list p{color:var(--muted);font-size:14px}
+.list .r{text-align:right;font-size:14px;font-weight:650;white-space:nowrap}
+.list .r small{display:block;color:var(--muted);font-weight:400;font-size:12px}
+/* projects: each row opens a few lines about the case */
+.cases .row{display:grid;grid-template-columns:40px 44px minmax(0,1fr) auto;gap:16px;align-items:center;padding:16px 0;width:100%;text-align:left;cursor:pointer}
+.list img.ic{object-fit:cover}
+.ic.one{background:var(--c);color:var(--k);font-size:20px;font-weight:800;border-radius:13px}
+.tag{display:inline-block;margin-left:10px;padding:2px 9px;border-radius:99px;font-size:12px;font-weight:650;letter-spacing:0;vertical-align:2px}
+.tag.win{background:var(--acc);color:#120b26}
+.tag.wip{border:1px solid #f59e0b;color:#f59e0b}
+.plus{color:var(--muted);font-size:22px;font-weight:300;transition:transform .3s var(--ease)}
+.open .plus{transform:rotate(45deg)}
+.more{display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s var(--ease)}
+.more>div{overflow:hidden;min-height:0}
+.open .more{grid-template-rows:1fr}
+.det{display:grid;grid-template-columns:100px minmax(0,1fr);gap:8px 16px;margin:0;padding:0 0 22px 100px;font-size:14px}
+.det dt{color:var(--faint)}
+.det dd{margin:0;color:#cfcfcf}
+.lk{display:inline-flex;gap:12px;margin-left:12px;color:var(--muted)}
+.list .role{font-weight:450;font-size:15px;color:var(--muted);letter-spacing:-.01em;margin-left:8px}
+.hl{list-style:none;margin:0;padding:0 0 22px 100px;display:grid;gap:6px;font-size:14px;color:#cfcfcf}
+.hl li::before{content:"—";color:var(--faint);margin-right:10px}
+.lk a:hover{color:var(--text)}
+
+/* contact */
+.contact{--pick-ink:#120b26;border:1px solid var(--line-strong);border-radius:28px;background:radial-gradient(120% 90% at 0% 0%,color-mix(in srgb,var(--pick) 16%,transparent),transparent 60%),var(--panel);display:grid;grid-template-columns:minmax(0,.75fr) minmax(0,1.45fr);gap:44px;padding:clamp(24px,3vw,40px);transition:--pick .4s}
+.contact:has([value=job]:checked){--pick:#b49bff;--pick-ink:#120b26}
+.contact:has([value=consulting]:checked){--pick:#ffd84d;--pick-ink:#231a00}
+.contact:has([value=collab]:checked){--pick:#ff8ad0;--pick-ink:#2a0a1e}
+.contact:has([value=other]:checked){--pick:#e6e6e6;--pick-ink:#111}
+.contact>div p{color:var(--muted);font-size:14px;line-height:1.65;margin:14px 0 0}
+.contact form{display:grid;gap:26px}
+.contact fieldset{border:0;margin:0;padding:0}
+.contact legend,.field>span{display:block;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;font-size:11px;font-weight:600;margin-bottom:10px;padding:0}
+.chips{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.chip{position:relative;cursor:pointer}
+.chip input{position:absolute;opacity:0;pointer-events:none}
+.chip span{display:block;text-align:center;white-space:nowrap;border:1px solid var(--line-strong);border-radius:999px;padding:10px 12px;font-size:14px;font-weight:600;transition:color .2s,border-color .2s,background-color .2s,transform .2s}
+.chip:hover span{border-color:#3a3a3a}
+.chip:active span{transform:scale(.97)}
+.chip input:checked+span{background:var(--pick);color:var(--pick-ink);border-color:var(--pick)}
+.chip input:focus-visible+span{outline:2px solid var(--pick);outline-offset:3px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:26px 28px}
+.field input,.field textarea{width:100%;display:block;border:1px solid var(--line-strong);background:#ffffff08;color:var(--text);font:inherit;font-size:16px;border-radius:14px;padding:13px 16px;transition:border-color .2s,box-shadow .2s}
+.field textarea{min-height:140px;resize:vertical}
+.field input::placeholder,.field textarea::placeholder{color:var(--faint);transition:color .18s}
+.field .ph-hide::placeholder{color:transparent}
+.field input:focus-visible,.field textarea:focus-visible{outline:none;border-color:var(--pick);box-shadow:0 0 0 4px color-mix(in srgb,var(--pick) 18%,transparent)}
+.field:focus-within>span{color:var(--text)}
+/* honeypot: people never see it, bots fill it */
+.trap{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
+.send{justify-self:start;background:var(--pick);color:var(--pick-ink);border-radius:999px;padding:15px 28px;font-size:15px;font-weight:700;display:inline-flex;align-items:center;gap:10px;transition:transform .2s}
+.send:hover:not(:disabled){transform:scale(1.04)}
+.send svg{width:18px;height:18px;flex:none}
+.send:disabled{opacity:.5;cursor:default}
+.actions{display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px}
+.status{margin:0;font-size:13px;color:var(--muted)}
+.status.ok{color:var(--pick)}
+.status.err{color:#ff9a9a}
+.status a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+
+
+@media(max-width:900px){
+  .page{grid-template-columns:minmax(0,1fr)}
+  .side{position:relative;height:auto;border:0;border-bottom:1px solid var(--line)}
+  .intro{margin:56px 0 40px}
+  .poster{grid-template-columns:minmax(0,1fr);grid-template-areas:"head" "metric" "tiers";gap:20px}
+  .tiers b{font-size:16px}
+  .metric{justify-items:start}
+  .tiles{grid-template-columns:1fr}
+  .list .n{display:none}
+  .cases .row{grid-template-columns:44px minmax(0,1fr) auto}
+  .det,.hl{padding-left:0}
+  .contact{grid-template-columns:1fr;gap:30px}
+  .pair{grid-template-columns:1fr}
+  .chips{grid-template-columns:1fr 1fr}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+
+/* page scrollbar: a thin accent thumb instead of the native bar, only with a mouse */
+.scroll{display:none}
+@media(pointer:fine){
+  html[data-scroll]{scrollbar-width:none}
+  html[data-scroll]::-webkit-scrollbar{display:none}
+  .scroll{position:fixed;z-index:100;top:0;right:0;bottom:0;width:12px;display:block;touch-action:none;user-select:none}
+  .scroll[hidden]{display:none}
+  .scroll span{position:absolute;top:0;right:0;width:3px;height:48px;border-radius:99px;background:var(--acc);transition:width .2s}
+  .scroll:hover span{width:5px}
+  .scroll:focus-visible{outline:none}
+  .scroll:focus-visible span{outline:1px solid var(--text);outline-offset:2px}
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <aside class="side">
+    <div class="top">
+      <a class="name" href="#now" data-t="name">Aleksei Lugovoi</a>
+      <p class="role" data-t="role">AI Engineer · Full-stack</p>
+    </div>
+    <div class="intro">
+      <h1 data-t="h1">You need it,<br>I build it.</h1>
+      <p class="eyebrow" data-t="eyebrow">Work with me</p>
+      <div class="profiles">
+        <a href="https://github.com/AlekseiLugovoi" target="_blank" rel="noopener" title="GitHub" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+        <a href="https://www.linkedin.com/in/aleksei-lugovoi" target="_blank" rel="noopener" title="LinkedIn" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+        <a href="https://t.me/lugovoi_aleksei" target="_blank" rel="noopener" title="Telegram" aria-label="Telegram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></a>
+        <a href="https://www.kaggle.com/alexeylugovoy" target="_blank" rel="noopener" title="Kaggle" aria-label="Kaggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3v18M17.5 4 9 12l8.5 8.5"/></svg></a>
+        <a href="mailto:luga9al@gmail.com" title="Email" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="m3 7 9 6.5L21 7"/></svg></a>
+        <a href="assets/Aleksei-Lugovoi-CV.pdf" target="_blank" rel="noopener" title="CV (PDF)" aria-label="CV (PDF)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><path d="M14 2.5H6.5a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V8z"/><path d="M14 2.5V8h5.5M8.5 13h7M8.5 17h5"/></svg></a>
+      </div>
+    </div>
+    <nav class="sections" aria-label="Sections">
+      <a href="#now"><i>01</i><span data-t="nav-now">Live</span></a>
+      <a href="#building"><i>02</i><span data-t="nav-building">Building</span></a>
+      <a href="#projects"><i>03</i><span data-t="nav-projects">Projects</span></a>
+      <a href="#experience"><i>04</i><span data-t="nav-experience">Experience</span></a>
+      <a href="#contact"><i>05</i><span data-t="nav-contact">Contact</span></a>
+    </nav>
+    <div class="lang" data-l="en"><i></i><button data-l="en" class="on">EN</button><button data-l="ru">RU</button></div>
+  </aside>
+
+  <main>
+    <section id="now">
+      <h2 class="title" data-t="now-t">Live products</h2>
+      <div class="posters">
+        <article class="poster" style="--c:#b49bff;--k:#120b26">
+          <div><h3>vbros.app</h3><p data-t="vbros-d">Built for AI creators.</p><a class="ask" href="https://vbros.app" target="_blank" rel="noopener" data-t="open">Open ↗</a></div>
+          <div class="metric"><img class="icon" src="assets/vbros-icon.png" alt="vbros"></div>
+          <ul class="tiers">
+            <li><span data-t="t-role">Role</span><b data-t="t-solo">Solo, end-to-end</b></li>
+            <li><span data-t="t-platform">Platform</span><b>Web</b></li>
+            <li><span data-t="t-status">Status</span><b>Beta · 2026</b></li>
+          </ul>
+        </article>
+        <article class="poster" style="--c:#ff8ad0;--k:#2a0a1e">
+          <div><h3>shmot.me</h3><p data-t="shmot-d">Virtual wardrobe and AI outfit builder.</p><a class="ask" href="https://shmot.me" target="_blank" rel="noopener" data-t="open">Open ↗</a></div>
+          <div class="metric"><img class="icon" src="assets/shmot-icon.png" alt="SHMOT"></div>
+          <ul class="tiers">
+            <li><span data-t="t-role">Role</span><b data-t="t-solo">Solo, end-to-end</b></li>
+            <li><span data-t="t-platform">Platform</span><b>Web</b></li>
+            <li><span data-t="t-status">Status</span><b>Beta · 2026</b></li>
+          </ul>
+        </article>
+        <article class="poster" style="--c:#86c8ff;--k:#04233d">
+          <div><h3 data-t="bots-t">AI Telegram bots</h3><p data-t="bots-d">Image, video and voice generation, right in Telegram <em>· 9 bots</em></p>
+            <nav class="band" aria-label="Bots"><div>
+                <a href="https://t.me/create_image_ai_bot" target="_blank" rel="noopener"><img src="assets/bots/create_image_ai_bot.jpg" alt="">Create Image</a>
+                <a href="https://t.me/video_craft_ai_bot" target="_blank" rel="noopener"><img src="assets/bots/video_craft_ai_bot.jpg" alt="">Video Craft</a>
+                <a href="https://t.me/face_morph_ai_bot" target="_blank" rel="noopener"><img src="assets/bots/face_morph_ai_bot.jpg" alt="">Face Morph</a>
+                <a href="https://t.me/tryon_ai_bot" target="_blank" rel="noopener"><img src="assets/bots/tryon_ai_bot.jpg" alt="">Try-On</a>
+                <a href="https://t.me/stickerpack_maker_ai_bot" target="_blank" rel="noopener"><img src="assets/bots/stickerpack_maker_ai_bot.jpg" alt="">Stickerpack Maker</a>
+                <a href="https://t.me/renovation_ai_bot" target="_blank" rel="noopener"><img src="assets/bots/renovation_ai_bot.jpg" alt="">Renovation</a>
+                <a href="https://t.me/product_photo_ai_bot" target="_blank" rel="noopener"><img src="assets/bots/product_photo_ai_bot.jpg" alt="">Product Photo</a>
+                <a href="https://t.me/sound_craft_bot" target="_blank" rel="noopener"><img src="assets/bots/sound_craft_bot.jpg" alt="">Sound Craft</a>
+                <a href="https://t.me/voice_gen_ai_bot" target="_blank" rel="noopener"><img src="assets/bots/voice_gen_ai_bot.jpg" alt="">Voice Gen</a>
+                <a href="https://t.me/create_image_ai_bot" target="_blank" rel="noopener"><img src="assets/bots/create_image_ai_bot.jpg" alt="">Create Image</a>
+                <a href="https://t.me/video_craft_ai_bot" target="_blank" rel="noopener"><img src="assets/bots/video_craft_ai_bot.jpg" alt="">Video Craft</a>
+                <a href="https://t.me/face_morph_ai_bot" target="_blank" rel="noopener"><img src="assets/bots/face_morph_ai_bot.jpg" alt="">Face Morph</a>
+                <a href="https://t.me/tryon_ai_bot" target="_blank" rel="noopener"><img src="assets/bots/tryon_ai_bot.jpg" alt="">Try-On</a>
+                <a href="https://t.me/stickerpack_maker_ai_bot" target="_blank" rel="noopener"><img src="assets/bots/stickerpack_maker_ai_bot.jpg" alt="">Stickerpack Maker</a>
+                <a href="https://t.me/renovation_ai_bot" target="_blank" rel="noopener"><img src="assets/bots/renovation_ai_bot.jpg" alt="">Renovation</a>
+                <a href="https://t.me/product_photo_ai_bot" target="_blank" rel="noopener"><img src="assets/bots/product_photo_ai_bot.jpg" alt="">Product Photo</a>
+                <a href="https://t.me/sound_craft_bot" target="_blank" rel="noopener"><img src="assets/bots/sound_craft_bot.jpg" alt="">Sound Craft</a>
+                <a href="https://t.me/voice_gen_ai_bot" target="_blank" rel="noopener"><img src="assets/bots/voice_gen_ai_bot.jpg" alt="">Voice Gen</a>
+            </div></nav></div>
+          <p class="metric"><span data-t="bots-m">new users / month</span><strong>10k</strong></p>
+          <ul class="tiers">
+            <li><span data-t="t-role">Role</span><b data-t="t-solo">Solo, end-to-end</b></li>
+            <li><span data-t="t-platform">Platform</span><b>Telegram</b></li>
+            <li><span data-t="t-status">Status</span><b>Live · 2026</b></li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="building">
+      <h2 class="title" data-t="building-t">Building now</h2>
+      <p class="lede" data-t="building-l">In development, not public yet.</p>
+      <div class="tiles">
+        <div class="tile" style="--c:#ffd84d;--k:#231a00"><span class="badge">P</span><b>Phonari</b><p data-t="phonari-d">Reading trainer for kids.</p></div>
+        <div class="tile" style="--c:#8fe3d4;--k:#062a24"><span class="badge">M</span><b>MyGameAI</b><p data-t="mygame-d">AI hockey coach from video.</p></div>
+        <div class="tile" style="--c:#ff9b78;--k:#2b0e04"><span class="badge">B</span><b>Boltik</b><p data-t="boltik-d">AI interior design and visualization.</p></div>
+        <a class="tile" href="https://vadekvate.com/" target="_blank" rel="noopener" style="--c:#86c8ff;--k:#04233d"><span class="badge">V</span><span class="go">↗</span><b>Vadekvate</b><p data-t="vad-d">Dating service for meaningful relationships.</p></a>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2 class="title" data-t="projects-t">Projects</h2>
+      <p class="lede" data-t="projects-l">Hackathons, client work and research.</p>
+      <ol class="list cases">
+        <li><button class="row" aria-expanded="false"><span class="n">01</span><span class="ic one" style="--c:#b49bff;--k:#120b26">L</span><div><b><span data-t="lct-t">Moscow LCT Hackathon</span><span class="tag win" data-t="lct-b">1st place</span></b><p data-t="lct-d">Generation of marketing images.</p></div><span class="plus">+</span></button>
+          <div class="more"><div><dl class="det"><dt data-t="d-task">Task</dt><dd data-t="lct-task">Generate on-brand marketing images for Gazprom Tech.</dd><dt data-t="d-result">Result</dt><dd data-t="lct-res">1st place at the LCT hackathon.</dd><dt data-t="d-client">Client</dt><dd><span data-t="lct-c">Gazprom Tech</span> · 2024 <span class="lk"><a href="https://i.moscow/lct/hackatons/3580028b92b24bbca9b5c7a859385bf8/en/" target="_blank" rel="noopener" data-t="lct-link">Hackathon ↗</a></span></dd></dl></div></div></li>
+        <li><button class="row" aria-expanded="false"><span class="n">02</span><span class="ic one" style="--c:#ff8ad0;--k:#2a0a1e">A</span><div><b><span data-t="ra-t">Real-time avatar</span></b><p data-t="ra-d">Talking avatar that answers live.</p></div><span class="plus">+</span></button>
+          <div class="more"><div><dl class="det"><dt data-t="d-task">Task</dt><dd data-t="ra-task">A virtual avatar that talks in real time.</dd><dt data-t="d-built">Built on</dt><dd>Agora, LAM, avtr1.</dd><dt data-t="d-client">Client</dt><dd>VisionLabs · 2026 <span class="lk"><a href="https://github.com/AlekseiLugovoi/avatar-studio" target="_blank" rel="noopener">GitHub ↗</a></span></dd></dl></div></div></li>
+        <li><button class="row" aria-expanded="false"><span class="n">03</span><span class="ic one" style="--c:#86c8ff;--k:#04233d">G</span><div><b><span data-t="ch-t">Character generation</span></b><p data-t="ch-d">Consistent AI characters across images and video.</p></div><span class="plus">+</span></button>
+          <div class="more"><div><dl class="det"><dt data-t="d-task">Task</dt><dd data-t="ch-task">Create a character once and keep the same identity in new images and video.</dd><dt data-t="d-approach">Approach</dt><dd data-t="ch-how">FLUX for references, PuLID / Kontext to lock identity, Wan / LTX for video.</dd><dt data-t="d-area">Area</dt><dd><span data-t="ch-area">Generative AI</span> · 2026 <span class="lk"><a href="https://github.com/AlekseiLugovoi/ai-character-generation" target="_blank" rel="noopener">GitHub ↗</a></span></dd></dl></div></div></li>
+        <li><button class="row" aria-expanded="false"><span class="n">04</span><span class="ic one" style="--c:#8fe3d4;--k:#062a24">C</span><div><b><span data-t="ct-t">Chest CT screening</span><span class="tag wip" data-t="wip">In progress</span></b><p data-t="ct-d">Detects anomalies on chest CT scans.</p></div><span class="plus">+</span></button>
+          <div class="more"><div><dl class="det"><dt data-t="d-task">Task</dt><dd data-t="ct-task">Flag chest CT studies that need a radiologist’s attention.</dd><dt data-t="d-approach">Approach</dt><dd data-t="ct-how">MedGemma VLM served with vLLM, structured NORMAL / ABNORMAL verdict.</dd><dt data-t="d-area">Area</dt><dd><span data-t="ct-c">Medical</span> · 2025 <span class="lk"><a href="https://github.com/AlekseiLugovoi/medscreen" target="_blank" rel="noopener">GitHub ↗</a></span></dd></dl></div></div></li>
+        <li><button class="row" aria-expanded="false"><span class="n">05</span><span class="ic one" style="--c:#ffd84d;--k:#231a00">S</span><div><b><span data-t="cs-t">Construction safety</span></b><p data-t="cs-d">PPE, ladder rules, smoke and fire detection.</p></div><span class="plus">+</span></button>
+          <div class="more"><div><dl class="det"><dt data-t="d-task">Task</dt><dd data-t="cs-task">Watch safety on billboard installation sites.</dd><dt data-t="d-detects">Detects</dt><dd data-t="cs-det">Helmets and safety shoes, more than two people on a ladder, smoke, sparks and fire.</dd><dt data-t="d-client">Client</dt><dd>ExpoControl · 2025</dd></dl></div></div></li>
+      </ol>
+    </section>
+
+    <section id="experience">
+      <h2 class="title" data-t="exp-t">Experience</h2>
+      <p class="lede" data-t="exp-l">Teams I worked in.</p>
+      <ol class="list cases">
+        <li><button class="row" aria-expanded="false"><span class="n">01</span><img class="ic" src="assets/companies/aiby.png" alt=""><div><b><span data-t="aiby-co">AIBY</span><span class="role" data-t="aiby-role">CV/DL Engineer</span></b><p data-t="aiby-d">AI apps: OnStyle, OnSkin, ChatOn and more.</p></div><span class="r"><span data-t="aiby-y">2024 — now</span><small data-t="aiby-city">Dubai</small></span></button>
+          <div class="more"><div><ul class="hl"><li><span data-t="site">Website:</span><span class="lk"><a href="https://aiby.mobi/" target="_blank" rel="noopener">aiby.mobi ↗</a></span></li><li><span data-t="apps">Apps:</span><span class="lk"><a href="https://apps.apple.com/us/app/ai-outfit-maker-onstyle/id6739629908" target="_blank" rel="noopener">OnStyle ↗</a><a href="https://apps.apple.com/us/iphone/search?term=onskin" target="_blank" rel="noopener">OnSkin ↗</a><a href="https://apps.apple.com/us/app/chaton-ai-chat-bot-assistant/id1661308505" target="_blank" rel="noopener">ChatOn ↗</a></span></li><li data-t="aiby-h0">Built the ML stack from scratch</li><li data-t="aiby-h1">25+ production models: CV, LLM, RAG, VLM, GenAI</li><li data-t="aiby-h2">Virtual try-on, outfit generation, AI stylist chatbot</li></ul></div></div></li>
+        <li><button class="row" aria-expanded="false"><span class="n">02</span><img class="ic" src="assets/companies/samolet.png" alt=""><div><b><span data-t="samolet-co">Samolet Group</span><span class="role" data-t="samolet-role">Tech Lead Data Scientist, CV</span></b><p data-t="samolet-d">Computer vision for one of Russia’s largest developers.</p></div><span class="r"><span data-t="samolet-y">2022 — 2024</span><small data-t="samolet-city">Moscow</small></span></button>
+          <div class="more"><div><ul class="hl"><li><span data-t="site">Website:</span><span class="lk"><a href="https://samolet.ru/" target="_blank" rel="noopener">samolet.ru ↗</a></span></li><li data-t="samolet-h0">Led a team of 3 engineers, 20+ models to production</li><li data-t="samolet-h1">Diffusion for virtual renovation, OCR, safety monitoring</li><li data-t="samolet-h2">DS infrastructure, AutoML pipelines, internal ML frameworks</li></ul></div></div></li>
+        <li><button class="row" aria-expanded="false"><span class="n">03</span><img class="ic" src="assets/companies/hse.png" alt=""><div><b><span data-t="hse-co">HSE University</span><span class="role" data-t="hse-role">Data Science Supervisor</span></b><p data-t="hse-d">Supervising data science work at the university.</p></div><span class="r"><span data-t="hse-y">2021 — 2024</span><small data-t="hse-city">Moscow</small></span></button>
+          <div class="more"><div><ul class="hl"><li><span data-t="site">Website:</span><span class="lk"><a href="https://www.hse.ru/en/" target="_blank" rel="noopener">hse.ru ↗</a></span></li><li data-t="hse-h0">Data science supervision alongside industry work</li></ul></div></div></li>
+        <li><button class="row" aria-expanded="false"><span class="n">04</span><img class="ic" src="assets/companies/sber.png" alt=""><div><b><span data-t="sber-co">Sber</span><span class="role" data-t="sber-role">Middle → Head of Direction, DS</span></b><p data-t="sber-d">Validation of the bank’s ML models.</p></div><span class="r"><span data-t="sber-y">2019 — 2022</span><small data-t="sber-city">Moscow</small></span></button>
+          <div class="more"><div><ul class="hl"><li><span data-t="site">Website:</span><span class="lk"><a href="https://www.sberbank.com/" target="_blank" rel="noopener">sberbank.com ↗</a></span></li><li data-t="sber-h0">Validation, development and consulting on bank ML models</li><li data-t="sber-h1">Mentored junior data scientists and interns</li></ul></div></div></li>
+        <li><button class="row" aria-expanded="false"><span class="n">05</span><span class="ic one" style="--c:#ff9b78;--k:#2b0e04">E</span><div><b><span data-t="expo-co">Expobank</span><span class="role" data-t="expo-role">Junior Data Scientist</span></b><p data-t="expo-d">Retail credit risk models and reporting.</p></div><span class="r"><span data-t="expo-y">2019</span><small data-t="expo-city">Moscow</small></span></button>
+          <div class="more"><div><ul class="hl"><li><span data-t="site">Website:</span><span class="lk"><a href="https://expobank.ru/" target="_blank" rel="noopener">expobank.ru ↗</a></span></li><li data-t="expo-h0">ML development, loan portfolio analysis, credit risk reporting</li></ul></div></div></li>
+      </ol>
+    </section>
+
+    <section class="contact" id="contact">
+      <div><h2 class="title" data-t="contact-t">Let’s build something that works.</h2><p data-t="contact-d">Tell me about the problem: data, constraints, deadline.</p></div>
+      <form id="form">
+        <fieldset><legend data-t="kind">What is it about</legend>
+          <div class="chips">
+            <label class="chip"><input type="radio" name="kind" value="job" checked><span data-t="job">Full-time role</span></label>
+            <label class="chip"><input type="radio" name="kind" value="consulting"><span data-t="consulting">Consulting</span></label>
+            <label class="chip"><input type="radio" name="kind" value="collab"><span data-t="collab">Collaboration</span></label>
+            <label class="chip"><input type="radio" name="kind" value="other"><span data-t="other">Other</span></label>
+          </div>
+        </fieldset>
+        <div class="pair">
+          <label class="field"><span data-t="f-name">Name</span><input name="name" type="text" placeholder="Your name" data-tp="p-name" autocomplete="name"></label>
+          <label class="field"><span>Email</span><input name="email" type="email" placeholder="you@company.com" autocomplete="email" required></label>
+        </div>
+        <label class="trap" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off"></label>
+        <label class="field"><span data-t="f-msg">Message</span><textarea name="message" placeholder="The problem, the data, the timeline…" data-tp="p-msg" required></textarea></label>
+        <div class="actions"><button class="send" type="submit"><span data-t="send">Send</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"/></svg></button><p class="status" role="status" aria-live="polite"></p></div>
+      </form>
+    </section>
+  </main>
+</div>
+<div class="scroll" role="scrollbar" aria-label="Page scroll" aria-orientation="vertical" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0" hidden><span></span></div>
+
+<script>
+const EMAIL = 'luga9al@gmail.com';
+
+const RU = {
+  doc: 'Алексей Луговой — AI-инженер',
+  name: 'Алексей Луговой', role: 'AI-инженер · Full-stack', eyebrow: 'Давайте работать', h1: 'С вас идея,<br>с меня продукт.',
+  'nav-now': 'Запущено', 'nav-building': 'В разработке', 'nav-projects': 'Проекты', 'nav-experience': 'Опыт', 'nav-contact': 'Связаться',
+  'bots-t': 'AI-боты в Telegram', 'bots-d': 'Генерация изображений, видео и голоса прямо в Telegram <em>· 9 ботов</em>', 'bots-m': 'новых юзеров в месяц',
+  'vbros-d': 'Создан для AI-креаторов.',
+  'shmot-d': 'Виртуальный гардероб и AI-подбор образов.', open: 'Открыть ↗',
+  't-role': 'Роль', 't-solo': 'Всё сам, от и до', 't-platform': 'Платформа', 't-status': 'Статус',
+  'now-t': 'Запущенные продукты',
+  'building-t': 'Сейчас в разработке', 'building-l': 'Пока не в публичном доступе.',
+  'phonari-d': 'Тренажёр чтения для детей.', 'mygame-d': 'Хоккейный AI-тренер по видео.', 'boltik-d': 'AI-дизайн и визуализация интерьеров.', 'vad-d': 'Дейтинг-сервис для осмысленных отношений.',
+  'projects-t': 'Проекты', 'projects-l': 'Хакатоны, заказы и исследования.',
+  'lct-t': 'Московский хакатон ЛЦТ', 'lct-d': 'Генерация маркетинговых изображений.', 'lct-b': '1 место', 'lct-c': 'Газпром Тех',
+  'lct-task': 'Генерация маркетинговых изображений в стиле бренда Газпром Тех.', 'lct-res': '1 место на хакатоне ЛЦТ.',
+  'ct-t': 'Скрининг КТ грудной клетки', 'ct-d': 'Находит аномалии на КТ-снимках.', 'ct-c': 'Медицина', wip: 'В работе',
+  'ct-task': 'Отмечать КТ-исследования, которым нужно внимание рентгенолога.', 'ct-how': 'VLM MedGemma на vLLM, структурированный вердикт NORMAL / ABNORMAL.',
+  'cs-t': 'Безопасность на стройке', 'cs-d': 'СИЗ, правила работы на лестнице, детекция дыма и огня.',
+  'cs-task': 'Контроль безопасности при монтаже рекламных конструкций.', 'cs-det': 'Каски и спецобувь, больше двух человек на лестнице, дым, искры и огонь.',
+  'ra-t': 'Аватар в реальном времени', 'ra-d': 'Говорящий аватар, который отвечает вживую.', 'ra-task': 'Виртуальный аватар, который разговаривает в реальном времени.',
+  'lct-link': 'Хакатон ↗', 'ch-t': 'Генерация персонажей', 'ch-d': 'Консистентные AI-персонажи на изображениях и видео.', 'ch-area': 'Генеративный AI',
+  'ch-task': 'Создать персонажа один раз и сохранять его внешность на новых изображениях и в видео.', 'ch-how': 'FLUX для референсов, PuLID / Kontext для фиксации внешности, Wan / LTX для видео.',
+  'd-task': 'Задача', 'd-result': 'Результат', 'd-approach': 'Подход', 'd-detects': 'Детекция', 'd-built': 'Основа', 'd-client': 'Заказчик', 'd-area': 'Сфера',
+  'exp-t': 'Опыт', 'exp-l': 'Команды, в которых я работал.',
+  'aiby-co': 'AIBY', 'aiby-role': 'CV/DL-инженер', 'aiby-d': 'AI-приложения: OnStyle, OnSkin, ChatOn и другие.', 'apps': 'Приложения:', 'site': 'Сайт:', 'aiby-y': '2024 — н. в.', 'aiby-city': 'Дубай',
+  'aiby-h0': 'Собрал ML-стек с нуля', 'aiby-h1': '25+ моделей в продакшене: CV, LLM, RAG, VLM, GenAI', 'aiby-h2': 'Виртуальная примерка, генерация образов, чат-бот AI-стилист',
+  'samolet-co': 'Группа Самолёт', 'samolet-role': 'Тех-лид Data Science, CV', 'samolet-d': 'Компьютерное зрение для одного из крупнейших застройщиков России.', 'samolet-y': '2022 — 2024', 'samolet-city': 'Москва',
+  'samolet-h0': 'Руководил командой из 3 инженеров, 20+ моделей в продакшене', 'samolet-h1': 'Диффузия для виртуального ремонта, OCR, контроль безопасности', 'samolet-h2': 'DS-инфраструктура, AutoML-пайплайны, внутренние ML-фреймворки',
+  'hse-co': 'ВШЭ', 'hse-role': 'Супервайзер по Data Science', 'hse-d': 'Курирование data science-работ в университете.', 'hse-y': '2021 — 2024', 'hse-city': 'Москва',
+  'hse-h0': 'Курирование DS-работ параллельно с работой в индустрии',
+  'sber-co': 'Сбер', 'sber-role': 'Middle → руководитель направления DS', 'sber-d': 'Валидация ML-моделей банка.', 'sber-y': '2019 — 2022', 'sber-city': 'Москва',
+  'sber-h0': 'Валидация, разработка и консалтинг по ML-моделям банка', 'sber-h1': 'Менторство джунов и стажёров',
+  'expo-co': 'Экспобанк', 'expo-role': 'Junior Data Scientist', 'expo-d': 'Модели и отчётность по розничному кредитному риску.', 'expo-y': '2019', 'expo-city': 'Москва',
+  'expo-h0': 'ML-разработка, анализ кредитного портфеля, отчётность по рискам',
+  'contact-t': 'Давайте сделаем то, что работает.', 'contact-d': 'Расскажите о задаче: данные, ограничения, сроки.',
+  kind: 'О чём речь', job: 'Работа в штат', consulting: 'Консалтинг', collab: 'Сотрудничество', other: 'Другое',
+  'f-name': 'Имя', 'f-msg': 'Сообщение', 'p-name': 'Ваше имя', 'p-msg': 'Задача, данные, сроки…', send: 'Отправить',
+};
+// English lives in the markup; it is collected once so both languages swap the same way
+const EN = {doc: document.title};
+document.querySelectorAll('[data-t]').forEach(el => EN[el.dataset.t] = el.innerHTML);
+document.querySelectorAll('[data-tp]').forEach(el => EN[el.dataset.tp] = el.placeholder);
+
+const sw = document.querySelector('.lang');
+let lang = 'en', switching = false;
+// Geist's Cyrillic part is a separate file; loading it up front keeps the first switch from flashing a fallback font
+document.fonts.load('1em Geist', 'Алексей');
+
+// Texts leave upwards (top to bottom as a wave), then all swap in one go while hidden, so the layout shifts once,
+// then they come back from below. The language class goes onto each element with its text, never ahead of it.
+async function setLang(l, instant){
+  if(l === lang || switching) return;
+  lang = l;
+  const T = l === 'ru' ? RU : EN;
+  document.documentElement.lang = l;
+  document.title = T.doc;
+  sw.dataset.l = l;
+  sw.querySelectorAll('button').forEach(b => b.classList.toggle('on', b.dataset.l === l));
+  history.replaceState(null, '', (l === 'ru' ? '?lang=ru' : location.pathname) + location.hash);
+  const swap = el => { el.innerHTML = T[el.dataset.t]; el.classList.toggle('ru', l === 'ru'); };
+  const els = [...document.querySelectorAll('[data-t]')];
+  // Placeholders cannot be animated directly: their colour fades out, the text swaps, the colour fades back
+  const holders = [...document.querySelectorAll('[data-tp]')];
+  const swapHolders = () => holders.forEach(el => el.placeholder = T[el.dataset.tp]);
+  if(instant || matchMedia('(prefers-reduced-motion: reduce)').matches){ swapHolders(); return els.forEach(swap); }
+  switching = true;
+  const vh = innerHeight, ease = 'cubic-bezier(.2,.8,.2,1)';
+  const shown = els.filter(el => { const r = el.getBoundingClientRect(); return r.bottom > 0 && r.top < vh; });
+  const delay = new Map(shown.map(el => [el, Math.max(el.getBoundingClientRect().top, 0) / vh * 240]));
+  await document.fonts.load('1em Geist', 'Алексей');
+  holders.forEach(el => el.classList.add('ph-hide'));
+  const outs = shown.map(el => el.animate([{opacity:1, transform:'none'}, {opacity:0, transform:'translateY(-.4em)'}], {duration:160, delay:delay.get(el), easing:ease, fill:'forwards'}));
+  await Promise.all(outs.map(a => a.finished));
+  els.forEach(swap);
+  swapHolders();
+  requestAnimationFrame(() => holders.forEach(el => el.classList.remove('ph-hide')));
+  const ins = shown.map(el => el.animate([{opacity:0, transform:'translateY(.4em)'}, {opacity:1, transform:'none'}], {duration:200, delay:delay.get(el) / 2, easing:ease, fill:'backwards'}));
+  outs.forEach(a => a.cancel());
+  await Promise.all(ins.map(a => a.finished));
+  switching = false;
+}
+sw.onclick = e => { const b = e.target.closest('button'); if(b) setLang(b.dataset.l); };
+if(new URLSearchParams(location.search).get('lang') === 'ru') setLang('ru', true);
+
+// The form goes through FormSubmit (no server of our own); on any failure it points to the email instead
+const form = document.getElementById('form'), status = form.querySelector('.status'), sendBtn = form.querySelector('.send');
+const MSG = {
+  en: {sending: 'Sending…', ok: 'Sent. Thanks, I’ll get back to you soon.', err: `Couldn’t send. Write to <a href="mailto:${EMAIL}">${EMAIL}</a>`},
+  ru: {sending: 'Отправляю…', ok: 'Отправлено. Спасибо, скоро отвечу.', err: `Не отправилось. Напишите на <a href="mailto:${EMAIL}">${EMAIL}</a>`},
+};
+const say = (k, cls = '') => { status.innerHTML = MSG[lang][k]; status.className = 'status ' + cls; };
+form.onsubmit = async e => {
+  e.preventDefault();
+  const f = new FormData(form);
+  const kind = form.querySelector(`[value=${f.get('kind')}] + span`).textContent;
+  // a filled honeypot means a bot: it gets the success message, nothing is sent
+  if(f.get('website')){ say('ok', 'ok'); form.reset(); return; }
+  sendBtn.disabled = true;
+  say('sending');
+  try {
+    const r = await fetch(`https://formsubmit.co/ajax/${EMAIL}`, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json', Accept: 'application/json'},
+      body: JSON.stringify({_subject: `Portfolio · ${kind}`, _template: 'table', _captcha: 'false', topic: kind, name: f.get('name'), email: f.get('email'), message: f.get('message')}),
+    });
+    const j = await r.json();
+    if(!r.ok || String(j.success) !== 'true') throw new Error(j.message);
+    say('ok', 'ok');
+    form.reset();
+  } catch {
+    say('err', 'err');
+  }
+  sendBtn.disabled = false;
+};
+
+// Bots band: the track cruises left and recycles the chip that left either edge.
+// A press becomes a drag after 6px; the release speed is the fling, which eases back to the cruise.
+// A mouse over the band eases it to a stop; a drag ends without opening the bot under it.
+(band => {
+  const track = band.firstElementChild, gap = parseFloat(getComputedStyle(track).gap) || 0;
+  const move = !matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let off = 0, v = null, last = performance.now(), drag = null, swallow = false, hover = false;
+  const tick = now => {
+    const first = track.firstElementChild, end = track.lastElementChild, wf = first.offsetWidth + gap, we = end.offsetWidth + gap;
+    const cruise = move && !hover ? -32 : 0, dt = Math.min(now - last, 100) / 1000;
+    v ??= cruise;
+    if(!drag?.on){ v += (cruise - v) * (1 - Math.exp(-dt / .6)); off += v * dt; }
+    if(-off > wf){ off += wf; track.append(first); }
+    else if(off > 0){ off -= we; track.prepend(end); }
+    track.style.transform = `translateX(${off}px)`;
+    last = now;
+    requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+  band.addEventListener('pointerenter', e => { if(e.pointerType === 'mouse') hover = true; });
+  band.addEventListener('pointerleave', () => { hover = false; });
+  band.addEventListener('pointerdown', e => { if(!e.button){ drag = {id:e.pointerId, x0:e.clientX, x:e.clientX, t:e.timeStamp, v:0}; swallow = false; } });
+  band.addEventListener('pointermove', e => {
+    if(drag?.id !== e.pointerId) return;
+    if(!drag.on){ if(Math.abs(e.clientX - drag.x0) < 6) return; drag.on = true; band.setPointerCapture(e.pointerId); band.classList.add('drag'); }
+    const dx = e.clientX - drag.x;
+    off += dx; drag.v = drag.v * .5 + dx / Math.max(e.timeStamp - drag.t, 1) * 500; drag.x = e.clientX; drag.t = e.timeStamp;
+  });
+  const drop = e => {
+    if(drag?.id !== e.pointerId) return;
+    if(drag.on){ v = e.timeStamp - drag.t < 100 ? Math.max(-4000, Math.min(4000, drag.v)) : 0; swallow = true; band.classList.remove('drag'); }
+    drag = null;
+  };
+  band.addEventListener('pointerup', drop);
+  band.addEventListener('pointercancel', drop);
+  band.addEventListener('click', e => { if(swallow){ swallow = false; e.preventDefault(); e.stopPropagation(); } }, true);
+  band.addEventListener('wheel', e => { if(Math.abs(e.deltaX) > Math.abs(e.deltaY)){ e.preventDefault(); off -= e.deltaX; } }, {passive:false});
+})(document.querySelector('.band'));
+
+document.querySelectorAll('.cases .row').forEach(b => b.onclick = () => b.setAttribute('aria-expanded', b.parentElement.classList.toggle('open')));
+
+const links = [...document.querySelectorAll('.sections a')];
+const mark = id => links.forEach(a => a.classList.toggle('on', a.hash === '#' + id));
+const io = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting) mark(e.target.id); }), {rootMargin:'-40% 0px -55% 0px'});
+links.forEach(a => io.observe(document.querySelector(a.hash)));
+// The last section is too short to reach the middle band, so the very bottom of the page marks it
+addEventListener('scroll', () => { if(innerHeight + scrollY >= document.documentElement.scrollHeight - 2) mark(links.at(-1).hash.slice(1)); }, {passive: true});
+
+// Page scrollbar: the thumb maps scroll progress onto the window height; dragging it or pressing the track scrolls there
+const bar = document.querySelector('.scroll'), thumb = bar.firstElementChild, root = document.documentElement, fine = matchMedia('(pointer: fine)');
+const range = () => Math.max(0, root.scrollHeight - root.clientHeight), travel = () => Math.max(1, innerHeight - thumb.offsetHeight);
+let frame = 0, grab = null;
+function paintBar(){
+  frame = 0;
+  const r = range(), on = fine.matches && r > 0, p = r ? Math.min(1, Math.max(0, scrollY / r)) : 0;
+  bar.hidden = !on;
+  root.toggleAttribute('data-scroll', on);
+  thumb.style.transform = `translateY(${p * travel()}px)`;
+  bar.setAttribute('aria-valuenow', Math.round(p * 100));
+}
+const queueBar = () => { frame ||= requestAnimationFrame(paintBar); };
+const scrollToY = y => scrollTo({top: y, behavior: 'instant'});
+const jump = y => scrollToY((y - (grab ?? thumb.offsetHeight / 2)) / travel() * range());
+bar.addEventListener('pointerdown', e => {
+  if(e.button) return;
+  e.preventDefault();
+  grab = e.target === thumb ? e.clientY - thumb.getBoundingClientRect().top : thumb.offsetHeight / 2;
+  bar.setPointerCapture(e.pointerId);
+  jump(e.clientY);
+});
+bar.addEventListener('pointermove', e => { if(grab !== null) jump(e.clientY); });
+bar.addEventListener('lostpointercapture', () => { grab = null; });
+bar.addEventListener('keydown', e => {
+  const to = {ArrowDown: scrollY + 40, ArrowUp: scrollY - 40, PageDown: scrollY + innerHeight * .9, PageUp: scrollY - innerHeight * .9, Home: 0, End: range()}[e.key];
+  if(to !== undefined){ e.preventDefault(); scrollToY(to); }
+});
+addEventListener('scroll', queueBar, {passive: true});
+addEventListener('resize', queueBar);
+fine.addEventListener('change', queueBar);
+new ResizeObserver(queueBar).observe(document.body);
+paintBar();
+</script>
+</body>
+</html>
