@@ -175,6 +175,7 @@ a.tile:hover .go{color:var(--c);transform:translate(2px,-2px)}
 .status{margin:0;font-size:13px;color:var(--muted)}
 .status.ok{color:var(--pick)}
 .status.err{color:#ff9a9a}
+.field .bad{border-color:#ff9a9a}
 .status a{color:inherit;text-decoration:underline;text-underline-offset:3px}
 
 
@@ -339,7 +340,7 @@ a.tile:hover .go{color:var(--c);transform:translate(2px,-2px)}
 
     <section class="contact" id="contact">
       <div><h2 class="title" data-t="contact-t">Let’s build something that works.</h2><p data-t="contact-d">Tell me about the problem: data, constraints, deadline.</p></div>
-      <form id="form">
+      <form id="form" novalidate>
         <fieldset><legend data-t="kind">What is it about</legend>
           <div class="chips">
             <label class="chip"><input type="radio" name="kind" value="job" checked><span data-t="job">Full-time role</span></label>
@@ -350,10 +351,10 @@ a.tile:hover .go{color:var(--c);transform:translate(2px,-2px)}
         </fieldset>
         <div class="pair">
           <label class="field"><span data-t="f-name">Name</span><input name="name" type="text" placeholder="Your name" data-tp="p-name" autocomplete="name"></label>
-          <label class="field"><span>Email</span><input name="email" type="email" placeholder="you@company.com" autocomplete="email" pattern="[^@\s]+@[^@\s]+\.[^@\s]{2,}" required></label>
+          <label class="field"><span>Email</span><input name="email" type="email" placeholder="you@company.com" autocomplete="email"></label>
         </div>
         <label class="trap" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off"></label>
-        <label class="field"><span data-t="f-msg">Message</span><textarea name="message" placeholder="The problem, the data, the timeline…" data-tp="p-msg" required></textarea></label>
+        <label class="field"><span data-t="f-msg">Message</span><textarea name="message" placeholder="The problem, the data, the timeline…" data-tp="p-msg"></textarea></label>
         <div class="actions"><button class="send" type="submit"><span data-t="send">Send</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"/></svg></button><p class="status" role="status" aria-live="polite"></p></div>
       </form>
     </section>
@@ -450,12 +451,20 @@ if(new URLSearchParams(location.search).get('lang') === 'ru') setLang('ru', true
 // The form goes through FormSubmit (no server of our own); on any failure it points to the email instead
 const form = document.getElementById('form'), status = form.querySelector('.status'), sendBtn = form.querySelector('.send');
 const MSG = {
-  en: {sending: 'Sending…', ok: 'Sent. Thanks, I’ll get back to you soon.', err: `Couldn’t send. Write to <a href="mailto:${EMAIL}">${EMAIL}</a>`},
-  ru: {sending: 'Отправляю…', ok: 'Отправлено. Спасибо, скоро отвечу.', err: `Не отправилось. Напишите на <a href="mailto:${EMAIL}">${EMAIL}</a>`},
+  en: {need: 'Please fill in your email and message.', bad: 'That email doesn’t look right.', sending: 'Sending…', ok: 'Sent. Thanks, I’ll get back to you soon.', err: `Couldn’t send. Write to <a href="mailto:${EMAIL}">${EMAIL}</a>`},
+  ru: {need: 'Заполните email и сообщение.', bad: 'Похоже, в email ошибка.', sending: 'Отправляю…', ok: 'Отправлено. Спасибо, скоро отвечу.', err: `Не отправилось. Напишите на <a href="mailto:${EMAIL}">${EMAIL}</a>`},
 };
 const say = (k, cls = '') => { status.innerHTML = MSG[lang][k]; status.className = 'status ' + cls; };
+const mail = form.elements.email, text = form.elements.message;
+const flag = (el, bad) => el.classList.toggle('bad', bad);
+[mail, text].forEach(el => el.addEventListener('input', () => flag(el, false)));
+// The browser's own checks speak the system language, so the form checks the fields itself in the page's language
 form.onsubmit = async e => {
   e.preventDefault();
+  const empty = [mail, text].filter(el => !el.value.trim());
+  const wrong = !empty.includes(mail) && !/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(mail.value.trim());
+  [mail, text].forEach(el => flag(el, empty.includes(el) || (el === mail && wrong)));
+  if(empty.length || wrong){ say(empty.length ? 'need' : 'bad', 'err'); (empty[0] || mail).focus(); return; }
   const f = new FormData(form);
   const kind = form.querySelector(`[value=${f.get('kind')}] + span`).textContent;
   // a filled honeypot means a bot: it gets the success message, nothing is sent
