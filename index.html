@@ -350,7 +350,7 @@ a.tile:hover .go{color:var(--c);transform:translate(2px,-2px)}
         </fieldset>
         <div class="pair">
           <label class="field"><span data-t="f-name">Name</span><input name="name" type="text" placeholder="Your name" data-tp="p-name" autocomplete="name"></label>
-          <label class="field"><span>Email</span><input name="email" type="email" placeholder="you@company.com" autocomplete="email" required></label>
+          <label class="field"><span>Email</span><input name="email" type="email" placeholder="you@company.com" autocomplete="email" pattern="[^@\s]+@[^@\s]+\.[^@\s]{2,}" required></label>
         </div>
         <label class="trap" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off"></label>
         <label class="field"><span data-t="f-msg">Message</span><textarea name="message" placeholder="The problem, the data, the timeline…" data-tp="p-msg" required></textarea></label>
@@ -466,7 +466,7 @@ form.onsubmit = async e => {
     const r = await fetch(`https://formsubmit.co/ajax/5a27117adaf8971e348a687f2f165ace`, {
       method: 'POST',
       headers: {'Content-Type': 'application/json', Accept: 'application/json'},
-      body: JSON.stringify({_subject: `Portfolio · ${kind}`, _template: 'table', _captcha: 'false', topic: kind, name: f.get('name'), email: f.get('email'), message: f.get('message')}),
+      body: JSON.stringify({_subject: `Portfolio · ${kind}`, _template: 'table', _captcha: 'false', _replyto: f.get('email'), topic: kind, name: f.get('name'), email: f.get('email'), message: f.get('message')}),
     });
     const j = await r.json();
     if(!r.ok || String(j.success) !== 'true') throw new Error(j.message);
